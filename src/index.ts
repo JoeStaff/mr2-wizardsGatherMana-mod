@@ -14,6 +14,6 @@ const {
   name,
   version,
   description,
-} = require("./MR2TestMods");
+} = require("./wizardsGatherManaMod");
 
 export { description, id, load, name, preload, version };

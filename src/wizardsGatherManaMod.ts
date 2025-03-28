@@ -6,7 +6,6 @@ import { Spell } from "magic-research-2-modding-sdk/modding-decs/backend/spells/
 const PACKAGE = require("../package.json");
 
 function hideGatherManaAction(MR2: MR2Globals) {
-  MR2.registerOverridableFunctions
   const gatherMana = MR2.Actions.getById("gatherMana");
   gatherMana.isVisible = () => {
     return false;

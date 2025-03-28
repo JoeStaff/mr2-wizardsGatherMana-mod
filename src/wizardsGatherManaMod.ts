@@ -11,7 +11,7 @@ const PACKAGE = require("../package.json");
 function hideGatherManaAction(MR2: MR2Globals) {
   const gatherMana = MR2.Actions.getById("gatherMana");
   gatherMana.isVisible = (state: GameState) => {
-    return false;
+    return MR2.getBuildingAmount(state,MR2.Buildings.getById("wizardChambers"))==0;
   };
 }
 
@@ -72,7 +72,7 @@ function buildGatherManaSpell(MR2: MR2Globals) {
     }
 
     isVisible(state: GameState): boolean {
-        return true;
+      return MR2.getBuildingAmount(state,MR2.Buildings.getById("wizardChambers"))>0;
     }
 
     isEnabled(state: GameState, skipAffordabilityChecks?: boolean): boolean {

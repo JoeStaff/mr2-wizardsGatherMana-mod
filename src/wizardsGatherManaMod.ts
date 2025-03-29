@@ -1,4 +1,4 @@
-import { MR2, MR2Globals } from "magic-research-2-modding-sdk";
+import { MR2Globals } from "magic-research-2-modding-sdk";
 import { DoActionArgs } from "magic-research-2-modding-sdk/modding-decs/backend/action/Action";
 import { ActionArea, ActionSubcategory } from "magic-research-2-modding-sdk/modding-decs/backend/action/ActionAreas";
 import { SpellAutocastCategory } from "magic-research-2-modding-sdk/modding-decs/backend/autocast/SpellAutocastCategory";
@@ -11,7 +11,7 @@ const PACKAGE = require("../package.json");
 function hideGatherManaAction(MR2: MR2Globals) {
   const gatherMana = MR2.Actions.getById("gatherMana");
   gatherMana.isVisible = (state: GameState) => {
-    return MR2.getBuildingAmount(state,MR2.Buildings.getById("wizardChambers"))==0;
+    return MR2.getBuildingAmount(state,MR2.Buildings.getById("wizardChamber"))==0;
   };
 }
 
@@ -42,7 +42,7 @@ function buildGatherManaSpell(MR2: MR2Globals) {
     }
 
     getAutocastCategory(): SpellAutocastCategory {
-        return MR2.SpellAutocastCategory.CHANNELING;
+        return MR2.SpellAutocastCategory.OTHER;
     }
 
     getTags(): string[] {
@@ -72,7 +72,7 @@ function buildGatherManaSpell(MR2: MR2Globals) {
     }
 
     isVisible(state: GameState): boolean {
-      return MR2.getBuildingAmount(state,MR2.Buildings.getById("wizardChambers"))>0;
+      return MR2.getBuildingAmount(state,MR2.Buildings.getById("wizardChamber"))>0;
     }
 
     isEnabled(state: GameState, skipAffordabilityChecks?: boolean): boolean {
@@ -83,7 +83,12 @@ function buildGatherManaSpell(MR2: MR2Globals) {
     }
 
     getLevelRequirements(): Partial<Record<SpellElement, number>> {
-        return { };
+        return {
+          Air:1,
+          Earth:1,
+          Fire:1,
+          Water:1
+        }
     }
 
     getExpFromUsage(state: GameState): {} {

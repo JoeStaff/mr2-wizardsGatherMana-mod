@@ -1,6 +1,7 @@
 import { MR2Globals } from "magic-research-2-modding-sdk";
 import { DoActionArgs } from "magic-research-2-modding-sdk/modding-decs/backend/action/Action";
 import { ActionArea, ActionSubcategory } from "magic-research-2-modding-sdk/modding-decs/backend/action/ActionAreas";
+import { AutocastRule } from "magic-research-2-modding-sdk/modding-decs/backend/autocast/Autocast";
 import { SpellAutocastCategory } from "magic-research-2-modding-sdk/modding-decs/backend/autocast/SpellAutocastCategory";
 import { GameState } from "magic-research-2-modding-sdk/modding-decs/backend/GameState";
 import { Resource } from "magic-research-2-modding-sdk/modding-decs/backend/Resources";
@@ -105,6 +106,10 @@ function buildGatherManaSpell(MR2: MR2Globals) {
         MR2.Resource.Mana,
         MR2.Actions.getById("gatherMana").getActionEffect(state,"mana")
         )(state);
+    }
+    
+    getBaseAutocastPointsRequirement(): number {
+      return 1;
     }
 
     isCastingRecommended(state: GameState): boolean {
